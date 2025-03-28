@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,19 +13,18 @@
             background: url('ocean-background.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
-            text-align: center;
             margin: 0;
             padding: 0;
-            transition: all 0.5s ease;
+            text-align: center;
+            overflow: hidden;
         }
 
         nav {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             padding: 15px;
             display: flex;
             justify-content: center;
             gap: 30px;
-            transition: background 0.5s ease;
         }
 
         nav a {
@@ -40,117 +39,146 @@
             transform: scale(1.1);
         }
 
-        .game-container {
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+        .game {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin-top: 30px;
+            overflow: hidden;
         }
 
         .hole {
+            position: absolute;
             width: 100px;
             height: 100px;
-            background: url('seaweed.png') no-repeat center center;
-            background-size: contain;
-            position: relative;
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
+            border: 2px solid #fff;
+            transition: opacity 0.3s;
         }
 
         .tentacle {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('tentacle.png') no-repeat center center;
+            width: 100px;
+            height: 100px;
+            background: url('tentacle.png') no-repeat center;
             background-size: contain;
             opacity: 0;
             transition: opacity 0.3s;
-        }
-
-        .tentacle.show {
-            opacity: 1;
-        }
-
-        #score-board {
-            font-size: 20px;
-            margin: 20px 0;
-        }
-
-        .btn {
-            background: #ffcc00;
-            color: #000;
-            padding: 10px 20px;
-            border: none;
             cursor: pointer;
-            border-radius: 8px;
-            margin: 5px;
+        }
+
+        #score, #highscores {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
             transition: transform 0.3s;
         }
 
-        .btn:hover {
-            background: #ffaa00;
+        button:hover {
             transform: scale(1.05);
+            background: #ffaa00;
         }
     </style>
 </head>
 
 <body>
     <nav>
-        <a href="index.html">Главная</a>
-        <a href="info.html">Инфо</a>
-        <a href="buy.html">Купить</a>
+        <a href="index.html">Welcome</a>
+        <a href="info.html">Info</a>
+        <a href="buy.html">Buy</a>
         <a href="mini-game.html">Mini-Game</a>
     </nav>
 
-    <h1>Поймай Кальмара</h1>
-    <div id="score-board">Счет: 0</div>
-    <button class="btn" onclick="startGame()">Старт</button>
-    <button class="btn" onclick="stopGame()">Стоп</button>
+    <h1>Catch the Squid 🐙</h1>
+    <div id="score">Score: 0</div>
+    <div id="highscores">Highscores: -</div>
 
-    <div class="game-container" id="game">
-        <div class="hole"><div class="tentacle"></div></div>
-        <div class="hole"><div class="tentacle"></div></div>
-        <div class="hole"><div class="tentacle"></div></div>
-        <div class="hole"><div class="tentacle"></div></div>
-        <div class="hole"><div class="tentacle"></div></div>
-        <div class="hole"><div class="tentacle"></div></div>
-    </div>
+    <button onclick="startGame()">Start</button>
+    <button onclick="stopGame()">Stop</button>
+    <button onclick="resetHighscores()">Reset Highscores</button>
+
+    <div class="game" id="game"></div>
 
     <script>
-        const tentacles = document.querySelectorAll('.tentacle');
+        const game = document.getElementById('game');
+        const scoreEl = document.getElementById('score');
+        const highscoreEl = document.getElementById('highscores');
         let score = 0;
-        let gameInterval;
+        let running = false;
+        const highscores = JSON.parse(localStorage.getItem('soct_highscores')) || [];
 
-        function showTentacle(t) {
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 800);
-        }
+        const positions = [
+            [100, 100], [400, 100], [700, 100],
+            [100, 400], [400, 400], [700, 400]
+        ];
+
+        positions.forEach(pos => {
+            const hole = document.createElement('div');
+            hole.classList.add('hole');
+            hole.style.left = pos[0] + 'px';
+            hole.style.top = pos[1] + 'px';
+            game.appendChild(hole);
+
+            const tentacle = document.createElement('div');
+            tentacle.classList.add('tentacle');
+            tentacle.style.left = pos[0] + 'px';
+            tentacle.style.top = pos[1] + 'px';
+            tentacle.onclick = () => {
+                if (tentacle.style.opacity == "1") {
+                    score++;
+                    scoreEl.textContent = `Score: ${score}`;
+                    tentacle.style.opacity = 0;
+                }
+            };
+            game.appendChild(tentacle);
+        });
 
         function startGame() {
+            running = true;
             score = 0;
-            document.getElementById('score-board').innerText = 'Счет: ' + score;
-            if (gameInterval) clearInterval(gameInterval);
-            gameInterval = setInterval(() => {
-                const random = tentacles[Math.floor(Math.random() * tentacles.length)];
-                showTentacle(random);
-            }, 1000);
+            scoreEl.textContent = `Score: ${score}`;
+            loop();
         }
 
         function stopGame() {
-            clearInterval(gameInterval);
+            running = false;
+            highscores.push(score);
+            highscores.sort((a, b) => b - a);
+            highscores.splice(5);
+            localStorage.setItem('soct_highscores', JSON.stringify(highscores));
+            updateHighscores();
         }
 
-        tentacles.forEach(t => {
-            t.addEventListener('click', () => {
-                if (t.classList.contains('show')) {
-                    score++;
-                    document.getElementById('score-board').innerText = 'Счет: ' + score;
-                    t.classList.remove('show');
-                }
-            });
-        });
+        function resetHighscores() {
+            localStorage.removeItem('soct_highscores');
+            highscores.length = 0;
+            updateHighscores();
+        }
+
+        function updateHighscores() {
+            highscoreEl.innerHTML = 'Highscores:<br>' + highscores.map(s => `⭐ ${s}`).join('<br>');
+        }
+
+        function loop() {
+            if (!running) return;
+            const tentacles = document.querySelectorAll('.tentacle');
+            tentacles.forEach(t => t.style.opacity = 0);
+            const random = tentacles[Math.floor(Math.random() * tentacles.length)];
+            random.style.opacity = 1;
+            setTimeout(loop, 1000);
+        }
+
+        updateHighscores();
     </script>
 </body>
 
