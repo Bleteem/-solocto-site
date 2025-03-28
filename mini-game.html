@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolOcto - Mini-Game</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: url('ocean-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            transition: all 0.5s ease;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            transition: background 0.5s ease;
+        }
+
+        nav a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffaa00;
+            transform: scale(1.1);
+        }
+
+        .game-container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hole {
+            width: 100px;
+            height: 100px;
+            background: url('seaweed.png') no-repeat center center;
+            background-size: contain;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .tentacle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('tentacle.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tentacle.show {
+            opacity: 1;
+        }
+
+        #score-board {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background: #ffcc00;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 5px;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            background: #ffaa00;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="info.html">Инфо</a>
+        <a href="buy.html">Купить</a>
+        <a href="mini-game.html">Mini-Game</a>
+    </nav>
+
+    <h1>Поймай Кальмара</h1>
+    <div id="score-board">Счет: 0</div>
+    <button class="btn" onclick="startGame()">Старт</button>
+    <button class="btn" onclick="stopGame()">Стоп</button>
+
+    <div class="game-container" id="game">
+        <div class="hole"><div class="tentacle"></div></div>
+        <div class="hole"><div class="tentacle"></div></div>
+        <div class="hole"><div class="tentacle"></div></div>
+        <div class="hole"><div class="tentacle"></div></div>
+        <div class="hole"><div class="tentacle"></div></div>
+        <div class="hole"><div class="tentacle"></div></div>
+    </div>
+
+    <script>
+        const tentacles = document.querySelectorAll('.tentacle');
+        let score = 0;
+        let gameInterval;
+
+        function showTentacle(t) {
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 800);
+        }
+
+        function startGame() {
+            score = 0;
+            document.getElementById('score-board').innerText = 'Счет: ' + score;
+            if (gameInterval) clearInterval(gameInterval);
+            gameInterval = setInterval(() => {
+                const random = tentacles[Math.floor(Math.random() * tentacles.length)];
+                showTentacle(random);
+            }, 1000);
+        }
+
+        function stopGame() {
+            clearInterval(gameInterval);
+        }
+
+        tentacles.forEach(t => {
+            t.addEventListener('click', () => {
+                if (t.classList.contains('show')) {
+                    score++;
+                    document.getElementById('score-board').innerText = 'Счет: ' + score;
+                    t.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
