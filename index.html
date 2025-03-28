@@ -1,4 +1,3 @@
-<!-- index.html (Welcome Page) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
         * {
-            transition: all 0.5s ease;
+            box-sizing: border-box;
         }
 
         body {
@@ -19,6 +18,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            transition: all 0.5s ease;
         }
 
         nav {
@@ -27,32 +27,25 @@
             display: flex;
             justify-content: center;
             gap: 30px;
+            transition: background 0.5s ease;
         }
 
         nav a {
             color: #ffcc00;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.4s ease;
+            transition: color 0.3s, transform 0.3s;
         }
 
         nav a:hover {
             color: #ffaa00;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .container {
             padding: 50px;
             opacity: 0;
-            transform: translateY(30px);
             animation: fadeIn 1s forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .logo {
@@ -65,14 +58,21 @@
             50% { transform: translateY(-10px); }
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h1 {
             margin-top: 20px;
             font-size: 28px;
+            transition: all 0.5s ease;
         }
 
         p {
             font-size: 18px;
             line-height: 1.5;
+            transition: all 0.5s ease;
         }
     </style>
 </head>
@@ -88,103 +88,6 @@
         <h1>🐙 Welcome to SolOcto (SOCT)</h1>
         <p>The Eight-Armed King of Solana awaits you!</p>
         <p>Use the menu above to navigate through the world of SolOcto.</p>
-    </div>
-</body>
-</html>
-
-<!-- info.html (Token Info & Roadmap) -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolOcto - Info</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-
-        * {
-            transition: all 0.5s ease;
-        }
-
-        body { font-family: 'Rubik', sans-serif; background: linear-gradient(135deg, #6e44ff, #b892ff); color: #fff; text-align: center; margin: 0; padding: 0; }
-        nav { background: rgba(0,0,0,0.3); padding: 15px; display: flex; justify-content: center; gap: 30px; }
-        nav a { color: #ffcc00; text-decoration: none; font-weight: bold; transition: 0.4s ease; }
-        nav a:hover { color: #ffaa00; transform: scale(1.05); }
-        .container { padding: 50px; opacity: 0; transform: translateY(30px); animation: fadeIn 1s forwards; }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1 { font-size: 28px; }
-        p { font-size: 18px; line-height: 1.5; }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="index.html">Welcome</a>
-        <a href="info.html">Info</a>
-        <a href="buy.html">Buy</a>
-    </nav>
-    <div class="container">
-        <h1>Token Info</h1>
-        <p><strong>Ticker:</strong> SOCT</p>
-        <p><strong>Chain:</strong> Solana</p>
-        <p><strong>Total Supply:</strong> 888,888,888 SOCT</p>
-        <p><strong>Tax:</strong> 0% (Fair Launch!)</p>
-        <h2>🔥 Roadmap</h2>
-        <p>✅ Launch | ✅ Listing on Solscan & Pump.fun | ✅ Community Building</p>
-        <p>🔹 Memes, Airdrops, Partnerships, Mini-game, NFTs, Merch</p>
-    </div>
-</body>
-</html>
-
-<!-- buy.html (Buy Page) -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolOcto - Buy</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-
-        * {
-            transition: all 0.5s ease;
-        }
-
-        body { font-family: 'Rubik', sans-serif; background: linear-gradient(135deg, #6e44ff, #b892ff); color: #fff; text-align: center; margin: 0; padding: 0; }
-        nav { background: rgba(0,0,0,0.3); padding: 15px; display: flex; justify-content: center; gap: 30px; }
-        nav a { color: #ffcc00; text-decoration: none; font-weight: bold; transition: 0.4s ease; }
-        nav a:hover { color: #ffaa00; transform: scale(1.05); }
-        .container { padding: 50px; opacity: 0; transform: translateY(30px); animation: fadeIn 1s forwards; }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .buy-btn { background-color: #ffcc00; color: #000; padding: 15px 30px; border: none; font-size: 18px; cursor: pointer; border-radius: 10px; text-decoration: none; display: inline-block; margin: 10px; transition: transform 0.3s; }
-        .buy-btn:hover { background-color: #ffaa00; transform: scale(1.1); }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="index.html">Welcome</a>
-        <a href="info.html">Info</a>
-        <a href="buy.html">Buy</a>
-    </nav>
-
-    <div class="container">
-        <h1>Buy $SOCT</h1>
-        <a href="https://pump.fun" class="buy-btn" target="_blank">Pump.fun</a>
-        <a href="https://raydium.io" class="buy-btn" target="_blank">Raydium</a>
-        <a href="https://jup.ag" class="buy-btn" target="_blank">Jupiter</a>
     </div>
 </body>
 </html>
