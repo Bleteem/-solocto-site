@@ -17,6 +17,7 @@
             padding: 0;
             text-align: center;
             overflow: hidden;
+            position: relative;
         }
 
         nav {
@@ -88,6 +89,46 @@
             transform: scale(1.05);
             background: #ffaa00;
         }
+
+        /* Стиль для водорослей */
+        .seaweed {
+            position: absolute;
+            bottom: -50px;
+            width: 50px;
+            height: 200px;
+            background: url('seaweed.png') no-repeat center bottom;
+            background-size: cover;
+            animation: float 10s linear infinite;
+        }
+
+        .seaweed:nth-child(1) {
+            left: 20%;
+            animation-duration: 12s;
+        }
+
+        .seaweed:nth-child(2) {
+            left: 40%;
+            animation-duration: 14s;
+        }
+
+        .seaweed:nth-child(3) {
+            left: 60%;
+            animation-duration: 16s;
+        }
+
+        .seaweed:nth-child(4) {
+            left: 80%;
+            animation-duration: 18s;
+        }
+
+        @keyframes float {
+            0% {
+                bottom: -50px;
+            }
+            100% {
+                bottom: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -108,6 +149,12 @@
     <button onclick="resetHighscores()">Reset High Scores</button>
 
     <div class="game" id="game"></div>
+
+    <!-- Добавляем водоросли как динамичные элементы -->
+    <div class="seaweed"></div>
+    <div class="seaweed"></div>
+    <div class="seaweed"></div>
+    <div class="seaweed"></div>
 
     <script>
         const game = document.getElementById('game');
