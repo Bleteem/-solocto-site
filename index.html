@@ -3,103 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolOcto (SOCT) - The Eight-Armed King of Solana</title>
+    <title>SolOcto - Welcome</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
         body {
-            font-family: 'Press Start 2P', cursive;
+            font-family: 'Rubik', sans-serif;
             background: linear-gradient(135deg, #6e44ff, #b892ff);
             color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
         }
+
+        nav {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffaa00;
+        }
+
         .container {
             padding: 50px;
-            position: relative;
         }
+
         .logo {
-            width: 200px;
+            width: 180px;
             animation: float 3s infinite ease-in-out;
         }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        .buy-btn {
-            background-color: #ffcc00;
-            color: #000;
-            padding: 15px 30px;
-            border: none;
+
+        h1 {
+            margin-top: 20px;
+            font-size: 28px;
+        }
+
+        p {
             font-size: 18px;
-            cursor: pointer;
-            border-radius: 10px;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            transition: transform 0.3s;
+            line-height: 1.5;
         }
-        .buy-btn:hover {
-            background-color: #ffaa00;
-            transform: scale(1.1);
-        }
-        .tentacle {
-            position: absolute;
-            width: 150px;
-            animation: wave 3s infinite alternate ease-in-out;
-        }
-        @keyframes wave {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(10deg); }
-        }
-        .tentacle.t1 { top: 0; left: 10%; }
-        .tentacle.t2 { top: 0; right: 10%; transform: scaleX(-1); }
-        .tentacle.t3 { bottom: 0; left: 5%; transform: rotate(180deg); }
-        .tentacle.t4 { bottom: 0; right: 5%; transform: rotate(180deg) scaleX(-1); }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html">Welcome</a>
+        <a href="info.html">Info</a>
+        <a href="buy.html">Buy</a>
+    </nav>
+
     <div class="container">
         <img src="solocto_logo.png" alt="SolOcto Logo" class="logo">
-        <h1>🐙 SolOcto (SOCT) – The Eight-Armed King of Solana!</h1>
-        <p>Hold SOCT, don’t be a noct! 🐙💰</p>
-        <h2>Why SolOcto?</h2>
-        <p>8 arms – 8 ways to earn! 💸</p>
-        <a href="https://raydium.io" class="buy-btn">Buy on Raydium</a>
-        <a href="https://jup.ag" class="buy-btn">Buy on Jupiter</a>
-        
-        <h2>📜 Token Info</h2>
-        <p><strong>Ticker:</strong> SOCT</p>
-        <p><strong>Chain:</strong> Solana</p>
-        <p><strong>Total Supply:</strong> 888,888,888 SOCT</p>
-        <p><strong>Tax:</strong> 0% (Fair Launch!)</p>
-        
-        <h2>🔥 Roadmap</h2>
-        <h3>🚀 Phase 1 – Get Started</h3>
-        <p>✅ Official launch of SolOcto</p>
-        <p>✅ Token listed on Solscan & pump.fun</p>
-        <p>✅ First community members join the movement</p>
-        
-        <h3>📢 Phase 2 – Community Growth</h3>
-        <p>🔹 Engage on Crypto Twitter with memes</p>
-        <p>🔹 Expand the community on Telegram & Discord</p>
-        <p>🔹 First airdrop event for active supporters</p>
-        
-        <h3>🌊 Phase 3 – Listings & Partnerships</h3>
-        <p>🔹 Get listed on Raydium & Jupiter</p>
-        <p>🔹 Grow partnerships with other Solana projects</p>
-        <p>🔹 Host fun community challenges & rewards</p>
-        
-        <h3>👑 Phase 4 – The Future</h3>
-        <p>🔹 Development of SolOcto mini-game</p>
-        <p>🔹 NFT collection - OctoGigaChads</p>
-        <p>🔹 Expanding the brand with exclusive merchandise</p>
+        <h1>🐙 Welcome to SolOcto (SOCT)</h1>
+        <p>The Eight-Armed King of Solana awaits you!</p>
+        <p>Use the menu above to navigate through the world of SolOcto.</p>
     </div>
-    <img src="tentacle.png" class="tentacle t1">
-    <img src="tentacle.png" class="tentacle t2">
-    <img src="tentacle.png" class="tentacle t3">
-    <img src="tentacle.png" class="tentacle t4">
 </body>
 </html>
