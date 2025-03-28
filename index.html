@@ -1,24 +1,25 @@
+<!-- index.html (Welcome Page) -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolOcto - Welcome</title>
+    <title>SolOcto - Добро пожаловать</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap');
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
-            font-family: 'Rubik', sans-serif;
-            background: linear-gradient(135deg, #6e44ff, #b892ff);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: url('background/ocean-background.jpg') no-repeat center center fixed, url('background/seaweed.png') repeat-x bottom;
+            background-size: cover, auto;
             color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
             transition: all 0.5s ease;
+            position: relative;
         }
 
         nav {
@@ -63,32 +64,24 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 {
-            margin-top: 20px;
-            font-size: 28px;
-            transition: all 0.5s ease;
-        }
+        h1 { margin-top: 20px; font-size: 28px; transition: all 0.5s ease; }
 
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-            transition: all 0.5s ease;
-        }
+        p { font-size: 18px; line-height: 1.5; transition: all 0.5s ease; }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html">Welcome</a>
-        <a href="info.html">Info</a>
-        <a href="buy.html">Buy</a>
-        <a href="game.html">Mini-game</a> <!-- Добавлена кнопка для мини-игры -->
+        <a href="index.html">Главная</a>
+        <a href="info.html">Инфо</a>
+        <a href="buy.html">Купить</a>
+        <a href="game.html">Mini-Game</a>
     </nav>
 
     <div class="container">
         <img src="solocto_logo.png" alt="SolOcto Logo" class="logo">
-        <h1>🐙 Welcome to SolOcto (SOCT)</h1>
-        <p>The Eight-Armed King of Solana awaits you!</p>
-        <p>Use the menu above to navigate through the world of SolOcto.</p>
+        <h1>🐙 Добро пожаловать в SolOcto (SOCT)</h1>
+        <p>Восьмирукий король Соланы ждёт тебя!</p>
+        <p>Используйте меню сверху, чтобы погрузиться в мир SolOcto.</p>
     </div>
 </body>
 </html>
