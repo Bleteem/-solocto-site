@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SolOcto - Инфо</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
         body {
-            font-family: 'Fredoka One', cursive;
+            font-family: 'Rubik', sans-serif;
             background: url('ocean-background.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
+            transition: all 0.5s ease;
         }
 
         nav {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             padding: 15px;
             display: flex;
             justify-content: center;
             gap: 30px;
+            transition: background 0.5s ease;
         }
 
         nav a {
@@ -39,43 +42,56 @@
 
         .container {
             padding: 50px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            margin: 30px;
+            opacity: 0;
             animation: fadeIn 1s forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        h1, h2 {
+            font-size: 28px;
+            transition: all 0.5s ease;
         }
 
-        h1, h2, p {
-            margin-bottom: 15px;
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
     <nav>
         <a href="index.html">Главная</a>
         <a href="info.html">Инфо</a>
         <a href="buy.html">Купить</a>
-        <a href="game.html">Мини-игра</a>
+        <a href="mini-game.html">Mini-Game</a>
     </nav>
-
     <div class="container">
         <h1>О токене SolOcto</h1>
         <p><strong>Тикер:</strong> SOCT</p>
         <p><strong>Сеть:</strong> Solana</p>
-        <p><strong>Общее предложение:</strong> 888,888,888 SOCT</p>
-        <p><strong>Налоги:</strong> 0% (честный запуск)</p>
+        <p><strong>Максимальная эмиссия:</strong> 888,888,888 SOCT</p>
+        <p><strong>Налог:</strong> 0% (Честный запуск)</p>
 
-        <h2>Короткая история</h2>
-        <p>В древних глубинах блокчейна Solana жил СолОсьминог — восьмирукий защитник сокровищ и веселья. Его миссия — принести прибыль и радость тем, кто верит в силу мемов и крипты. Его восемь щупалец символизируют восемь способов заработать, а его улыбка — вечный бычий рынок. Присоединяйся к армии осьминогов и стань частью легенды!</p>
+        <h2>🚀 История SolOcto</h2>
+        <p>SolOcto — восьмирукий король океана Solana. Он появился из глубин, чтобы принести процветание, веселье и огромное количество крипто-добычи своим последователям. Он следит за своим королевством и охраняет $SOCT от китов и фаддеров.</p>
 
-        <h2>Дорожная карта</h2>
-        <p>✅ Запуск | ✅ Список на Solscan & Pump.fun | ✅ Старт сообщества</p>
-        <p>🔹 Мемы, аирдропы, партнерства, мини-игры, NFT, мерч и многое другое</p>
+        <h2>🔥 Дорожная карта</h2>
+        <p>✅ Запуск | ✅ Листинг на Solscan и pump.fun | ✅ Первая комьюнити</p>
+        <p>🔹 Мемы, airdrop'ы, партнёрства, mini-игра, NFT-коллекция и мерч</p>
     </div>
 </body>
+
 </html>
