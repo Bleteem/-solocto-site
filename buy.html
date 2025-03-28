@@ -1,45 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolOcto - Buy</title>
+    <title>SolOcto - Купить</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
-        body { font-family: 'Rubik', sans-serif; background: linear-gradient(135deg, #6e44ff, #b892ff); color: #fff; text-align: center; margin: 0; padding: 0; transition: all 0.5s ease; }
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: url('ocean-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            transition: all 0.5s ease;
+        }
 
-        nav { background: rgba(0,0,0,0.3); padding: 15px; display: flex; justify-content: center; gap: 30px; transition: background 0.5s ease; }
+        nav {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            transition: background 0.5s ease;
+        }
 
-        nav a { color: #ffcc00; text-decoration: none; font-weight: bold; transition: color 0.3s, transform 0.3s; }
+        nav a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
 
-        nav a:hover { color: #ffaa00; transform: scale(1.1); }
+        nav a:hover {
+            color: #ffaa00;
+            transform: scale(1.1);
+        }
 
-        .container { padding: 50px; opacity: 0; animation: fadeIn 1s forwards; }
+        .container {
+            padding: 50px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
 
-        .buy-btn { background-color: #ffcc00; color: #000; padding: 15px 30px; border: none; font-size: 18px; cursor: pointer; border-radius: 10px; text-decoration: none; display: inline-block; margin: 10px; transition: transform 0.3s; }
+        .buy-btn {
+            background-color: #ffcc00;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
 
-        .buy-btn:hover { background-color: #ffaa00; transform: scale(1.1); }
+        .buy-btn:hover {
+            background-color: #ffaa00;
+            transform: scale(1.1);
+        }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
     <nav>
-        <a href="index.html">Welcome</a>
-        <a href="info.html">Info</a>
-        <a href="buy.html">Buy</a>
-        <a href="game.html">Mini-game</a> <!-- Добавлена кнопка для мини-игры -->
+        <a href="index.html">Главная</a>
+        <a href="info.html">Инфо</a>
+        <a href="buy.html">Купить</a>
+        <a href="mini-game.html">Mini-Game</a>
     </nav>
 
     <div class="container">
-        <h1>Buy $SOCT</h1>
+        <h1>Где купить $SOCT</h1>
         <a href="https://pump.fun" class="buy-btn" target="_blank">Pump.fun</a>
         <a href="https://raydium.io" class="buy-btn" target="_blank">Raydium</a>
         <a href="https://jup.ag" class="buy-btn" target="_blank">Jupiter</a>
     </div>
 </body>
+
 </html>
