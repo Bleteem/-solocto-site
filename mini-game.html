@@ -1,14 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SolOcto - Mini-game</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
-        body { font-family: 'Press Start 2P', cursive; background: linear-gradient(135deg, #6e44ff, #b892ff); color: #fff; text-align: center; margin: 0; padding: 0; transition: all 0.5s ease; }
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: url('ocean-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow: hidden;
+        }
 
-        nav { background: rgba(0,0,0,0.3); padding: 15px; display: flex; justify-content: center; gap: 30px; transition: background 0.5s ease; }
+        nav {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
 
-        nav a { color: #ffcc00; text-decoration: none; font
+        nav a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffaa00;
+            transform: scale(1.1);
+        }
+
+        .game {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .hole {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            border: 2px solid #fff;
+            transition: opacity 0.3s;
+        }
+
+        .tentacle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('tentacle.png') no-repeat center;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        #score, #highscores {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #ffaa00;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="info.html">Info</a>
+        <a href="buy.html">Buy</a>
+        <a href="mini-game.html">Mini-Game</a>
+    </nav>
+
+    <h1>Catch the Octopus 🐙</h1>
+    <div id="score">Score: 0</div>
+    <div id="highscores">High Scores: -</div>
+
+    <button onclick="startGame()">Start</button>
+    <button onclick="stopGame()">Stop</button>
+    <button onclick="resetHighscores()">Reset High Scores</button>
+
+    <div class="game" id="game"></div>
+
+    <script>
+        const game = document.getElementById('game');
+        const scoreEl = document.getElementById('score');
+        const highscoreEl = document.getElementById('highscores');
+        let score = 0;
+        let running = false;
+        const highscores = JSON.parse(localStorage.getItem('soct_highscores')) || [];
+
+        const positions = [
+            [100, 100], [400, 100], [700, 100],
+            [100, 400], [400, 400], [700, 400]
+        ];
+
+        positions.forEach(pos => {
+            const hole = document.createElement('div');
+            hole.classList.add('hole');
+            hole.style.left = pos[0] + 'px';
+            hole.style.top = pos[1] + 'px';
+            game.appendChild(hole);
+
+            const tentacle = document.createElement('div');
+            tentacle.classList.add('tentacle');
+            tentacle.style.left = pos[0] + 'px';
+            tentacle.style.top = pos[1] + 'px';
+            tentacle.onclick = () => {
+                if (tentacle.style.opacity == "1") {
+                    score++;
+                    scoreEl.textContent = `Score: ${score}`;
+                    tentacle.style.opacity = 0;
+                }
+            };
+            game.appendChild(tentacle);
+        });
+
+        function startGame() {
+            running = true;
+            score = 0;
+            scoreEl.textContent = `Score: ${score}`;
+            loop();
+        }
+
+        function stopGame() {
+            running = false;
+            highscores.push(score);
+            highscores.sort((a, b) => b - a);
+            highscores.splice(5);
+            localStorage.setItem('soct_highscores', JSON.stringify(highscores));
+            updateHighscores();
+        }
+
+        function resetHighscores() {
+            localStorage.removeItem('soct_highscores');
+            highscores.length = 0;
+            updateHighscores();
+        }
+
+        function updateHighscores() {
+            highscoreEl.innerHTML = 'High Scores:<br>' + highscores.map(s => `⭐ ${s}`).join('<br>');
+        }
+
+        function loop() {
+            if (!running) return;
+            const tentacles = document.querySelectorAll('.tentacle');
+            tentacles.forEach(t => t.style.opacity = 0);
+            const random = tentacles[Math.floor(Math.random() * tentacles.length)];
+            random.style.opacity = 1;
+            setTimeout(loop, 1000);
+        }
+
+        updateHighscores();
+    </script>
+</body>
+
+</html>
