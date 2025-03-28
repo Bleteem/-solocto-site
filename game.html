@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolOcto - Catch the Octopus!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Используем новый шрифт */
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(135deg, #6e44ff, #b892ff);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            transition: all 0.5s ease;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            transition: background 0.5s ease;
+        }
+
+        nav a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffaa00;
+            transform: scale(1.1);
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            margin: 50px auto;
+            width: 60%;
+            max-width: 800px;
+        }
+
+        .hole {
+            background-color: #222;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .octopus {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background-image: url('octopus.png');
+            background-size: cover;
+            background-position: center;
+            transition: all 0.5s ease;
+        }
+
+        .hidden {
+            bottom: -50px;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 28px;
+            color: #ffcc00;
+        }
+
+        .score {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        .nav-btn {
+            background-color: #ffcc00;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 30px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #ffaa00;
+            transform: scale(1.1);
+        }
+
+        .hole-container {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Welcome</a>
+        <a href="info.html">Info</a>
+        <a href="buy.html">Buy</a>
+        <a href="game.html">Catch the Octopus</a>
+    </nav>
+
+    <h1>Catch the Octopus!</h1>
+    <div class="score">Score: <span id="score">0</span></div>
+
+    <div class="game-container">
+        <div class="hole-container">
+            <div class="hole" id="hole1"></div>
+            <div class="octopus" id="octopus1"></div>
+        </div>
+        <div class="hole-container">
+            <div class="hole" id="hole2"></div>
+            <div class="octopus" id="octopus2"></div>
+        </div>
+        <div class="hole-container">
+            <div class="hole" id="hole3"></div>
+            <div class="octopus" id="octopus3"></div>
+        </div>
+        <div class="hole-container">
+            <div class="hole" id="hole4"></div>
+            <div class="octopus" id="octopus4"></div>
+        </div>
+        <div class="hole-container">
+            <div class="hole" id="hole5"></div>
+            <div class="octopus" id="octopus5"></div>
+        </div>
+        <div class="hole-container">
+            <div class="hole" id="hole6"></div>
+            <div class="octopus" id="octopus6"></div>
+        </div>
+    </div>
+
+    <a href="index.html" class="nav-btn">Back to Welcome Page</a>
+
+    <script>
+        let score = 0;
+        const octopuses = [
+            document.getElementById('octopus1'),
+            document.getElementById('octopus2'),
+            document.getElementById('octopus3'),
+            document.getElementById('octopus4'),
+            document.getElementById('octopus5'),
+            document.getElementById('octopus6')
+        ];
+
+        const holes = [
+            document.getElementById('hole1'),
+            document.getElementById('hole2'),
+            document.getElementById('hole3'),
+            document.getElementById('hole4'),
+            document.getElementById('hole5'),
+            document.getElementById('hole6')
+        ];
+
+        const scoreDisplay = document.getElementById('score');
+
+        function randomHole() {
+            return Math.floor(Math.random() * 6);
+        }
+
+        function showOctopus() {
+            const randomIndex = randomHole();
+            octopuses[randomIndex].classList.remove('hidden');
+            setTimeout(() => {
+                octopuses[randomIndex].classList.add('hidden');
+            }, 1000); // Hide after 1 second
+        }
+
+        function handleClick(e) {
+            const holeIndex = holes.indexOf(e.target);
+            if (holeIndex !== -1 && !octopuses[holeIndex].classList.contains('hidden')) {
+                score++;
+                scoreDisplay.textContent = score;
+            }
+        }
+
+        holes.forEach(hole => {
+            hole.addEventListener('click', handleClick);
+        });
+
+        setInterval(showOctopus, 1500); // Octopus appears every 1.5 seconds
+    </script>
+
+</body>
+</html>
