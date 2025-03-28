@@ -44,6 +44,12 @@
             height: 50px;
             background: url('tentacle.png') no-repeat center center;
             background-size: contain;
+            animation: appear 0.5s ease-out forwards;
+        }
+
+        @keyframes appear {
+            0% { transform: translateX(-50%) translateY(100px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
 
         .game-btn {
@@ -61,6 +67,20 @@
             background-color: #ffaa00;
             transform: scale(1.1);
         }
+
+        .scoreboard {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        .score {
+            color: #ffcc00;
+        }
+
+        .hole:active {
+            background-color: #ffcc00;
+        }
+
     </style>
 </head>
 <body>
@@ -69,23 +89,27 @@
     <button class="game-btn" onclick="startGame()">Start Game</button>
     <button class="game-btn" onclick="stopGame()" style="display:none;">Stop Game</button>
 
+    <div class="scoreboard">
+        <p>Score: <span id="score" class="score">0</span></p>
+    </div>
+
     <div class="game-container">
-        <div class="hole" id="hole1">
+        <div class="hole" id="hole1" onclick="hitSquid(1)">
             <div class="tentacle" id="tentacle1"></div>
         </div>
-        <div class="hole" id="hole2">
+        <div class="hole" id="hole2" onclick="hitSquid(2)">
             <div class="tentacle" id="tentacle2"></div>
         </div>
-        <div class="hole" id="hole3">
+        <div class="hole" id="hole3" onclick="hitSquid(3)">
             <div class="tentacle" id="tentacle3"></div>
         </div>
-        <div class="hole" id="hole4">
+        <div class="hole" id="hole4" onclick="hitSquid(4)">
             <div class="tentacle" id="tentacle4"></div>
         </div>
-        <div class="hole" id="hole5">
+        <div class="hole" id="hole5" onclick="hitSquid(5)">
             <div class="tentacle" id="tentacle5"></div>
         </div>
-        <div class="hole" id="hole6">
+        <div class="hole" id="hole6" onclick="hitSquid(6)">
             <div class="tentacle" id="tentacle6"></div>
         </div>
     </div>
@@ -93,11 +117,14 @@
     <script>
         let gameInterval;
         let gameRunning = false;
+        let score = 0;
 
         function startGame() {
             document.querySelector('.game-btn').style.display = 'none';
             document.querySelectorAll('.game-btn')[1].style.display = 'inline-block';
             gameRunning = true;
+            score = 0;
+            document.getElementById('score').innerText = score;
             gameInterval = setInterval(showTentacles, 1000);
         }
 
@@ -118,6 +145,17 @@
             setTimeout(() => {
                 tentacle.style.display = 'none';
             }, 1000);
+        }
+
+        function hitSquid(holeNumber) {
+            if (!gameRunning) return;
+
+            let tentacle = document.getElementById('tentacle' + holeNumber);
+            if (tentacle.style.display === 'block') {
+                score += 10;
+                document.getElementById('score').innerText = score;
+                tentacle.style.display = 'none';
+            }
         }
     </script>
 
