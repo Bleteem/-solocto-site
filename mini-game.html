@@ -1,3 +1,4 @@
+<!-- mini-game.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -117,9 +118,10 @@
         let running = false;
         const highscores = JSON.parse(localStorage.getItem('soct_highscores')) || [];
 
+        // Перемещены дырки ближе к центру
         const positions = [
-            [100, 100], [400, 100], [700, 100],
-            [100, 400], [400, 400], [700, 400]
+            [150, 200], [350, 200], [550, 200], // Верхняя строка ближе к центру
+            [150, 400], [350, 400], [550, 400]  // Нижняя строка ближе к центру
         ];
 
         positions.forEach(pos => {
