@@ -5,13 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-game: Catch the Squid</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
         body {
             font-family: 'Rubik', sans-serif;
-            background: #232323;
+            background: linear-gradient(135deg, #6e44ff, #b892ff);
             color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            transition: background 0.5s ease;
+        }
+
+        nav a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffaa00;
+            transform: scale(1.1);
         }
 
         .game-container {
@@ -31,12 +54,11 @@
             border-radius: 50%;
             margin: 0 auto;
             position: relative;
-            transition: background-color 0.3s;
         }
 
         .tentacle {
             position: absolute;
-            bottom: -50px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             display: none;
@@ -44,12 +66,8 @@
             height: 50px;
             background: url('tentacle.png') no-repeat center center;
             background-size: contain;
-            animation: appear 0.5s ease-out forwards;
-        }
-
-        @keyframes appear {
-            0% { transform: translateX(-50%) translateY(100px); opacity: 0; }
-            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .game-btn {
@@ -80,10 +98,16 @@
         .hole:active {
             background-color: #ffcc00;
         }
-
     </style>
 </head>
 <body>
+
+    <nav>
+        <a href="index.html">Welcome</a>
+        <a href="info.html">Info</a>
+        <a href="buy.html">Buy</a>
+        <a href="game.html">Mini-game</a>
+    </nav>
 
     <h1>Catch the Squid</h1>
     <button class="game-btn" onclick="startGame()">Start Game</button>
@@ -141,20 +165,29 @@
             let randomHole = Math.floor(Math.random() * 6) + 1;
             let tentacle = document.getElementById('tentacle' + randomHole);
             tentacle.style.display = 'block';
+            setTimeout(() => {
+                tentacle.style.opacity = 1;
+            }, 100);  // Задержка перед анимацией появления
 
             setTimeout(() => {
-                tentacle.style.display = 'none';
-            }, 1000);
+                tentacle.style.opacity = 0;
+                setTimeout(() => {
+                    tentacle.style.display = 'none';
+                }, 500);  // Подождать, пока исчезнет
+            }, 1500);  // Убираем кальмара через 1.5 секунды
         }
 
         function hitSquid(holeNumber) {
             if (!gameRunning) return;
 
             let tentacle = document.getElementById('tentacle' + holeNumber);
-            if (tentacle.style.display === 'block') {
+            if (tentacle.style.opacity == 1) {
                 score += 10;
                 document.getElementById('score').innerText = score;
-                tentacle.style.display = 'none';
+                tentacle.style.opacity = 0;
+                setTimeout(() => {
+                    tentacle.style.display = 'none';
+                }, 500);
             }
         }
     </script>
