@@ -90,7 +90,7 @@
             background: #ffaa00;
         }
 
-        /* Стиль для водорослей */
+        /* Updated style for seaweed animation */
         .seaweed {
             position: absolute;
             bottom: -50px;
@@ -98,36 +98,54 @@
             height: 200px;
             background: url('seaweed.png') no-repeat center bottom;
             background-size: cover;
-            animation: float 10s linear infinite;
+            animation: float 6s ease-in-out infinite, sway 3s ease-in-out infinite;
         }
 
-        .seaweed:nth-child(1) {
-            left: 20%;
-            animation-duration: 12s;
-        }
-
-        .seaweed:nth-child(2) {
-            left: 40%;
-            animation-duration: 14s;
-        }
-
-        .seaweed:nth-child(3) {
-            left: 60%;
-            animation-duration: 16s;
-        }
-
-        .seaweed:nth-child(4) {
-            left: 80%;
-            animation-duration: 18s;
-        }
-
+        /* Animation for seaweed floating in water */
         @keyframes float {
             0% {
                 bottom: -50px;
             }
-            100% {
-                bottom: 100%;
+            50% {
+                bottom: 60%;
             }
+            100% {
+                bottom: -50px;
+            }
+        }
+
+        /* Additional sway animation to simulate water movement */
+        @keyframes sway {
+            0% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+            100% {
+                transform: rotate(-5deg);
+            }
+        }
+
+        /* Adjusting seaweed positions */
+        .seaweed:nth-child(1) {
+            left: 15%;
+            animation-duration: 12s, 3s;
+        }
+
+        .seaweed:nth-child(2) {
+            left: 35%;
+            animation-duration: 14s, 3.5s;
+        }
+
+        .seaweed:nth-child(3) {
+            left: 55%;
+            animation-duration: 16s, 4s;
+        }
+
+        .seaweed:nth-child(4) {
+            left: 75%;
+            animation-duration: 18s, 4.5s;
         }
     </style>
 </head>
@@ -150,7 +168,7 @@
 
     <div class="game" id="game"></div>
 
-    <!-- Добавляем водоросли как динамичные элементы -->
+    <!-- Adding seaweed as dynamic floating elements -->
     <div class="seaweed"></div>
     <div class="seaweed"></div>
     <div class="seaweed"></div>
@@ -164,10 +182,10 @@
         let running = false;
         const highscores = JSON.parse(localStorage.getItem('soct_highscores')) || [];
 
-        // Пересчитанные позиции дырок, сдвинутые немного ниже относительно кнопок
+        // Adjusted hole positions slightly lower to fit better under the buttons
         const positions = [
-            [500, 50], [700, 50], [900, 50], // Верхняя строка
-            [500, 250], [700, 250], [900, 250]  // Нижняя строка
+            [500, 50], [700, 50], [900, 50], // Top row
+            [500, 250], [700, 250], [900, 250]  // Bottom row
         ];
 
         positions.forEach(pos => {
